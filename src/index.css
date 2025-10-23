@@ -1,0 +1,44 @@
+/* --- Tailwind layers must come first --- */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Optional: your global tweaks live *after* Tailwind */
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: dark light;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* You can delete most of Vite’s demo styles if Tailwind handles them.
+   Keep only what you really want as overrides. */
+a { font-weight: 500; text-decoration: none; }
+a:hover { text-decoration: none; }
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+/* Prefer reduced motion for our animated background */
+@media (prefers-reduced-motion: reduce) {
+  .motion-safe\\:animate-none, [data-reduce-motion="true"] * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Light mode fallback if you keep the root colors */
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+}

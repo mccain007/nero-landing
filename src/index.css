@@ -28,11 +28,17 @@ body {
 }
 
 /* Prefer reduced motion for our animated background */
+/* AFTER (no warning; same behavior) */
 @media (prefers-reduced-motion: reduce) {
-  .motion-safe\\:animate-none, [data-reduce-motion="true"] * {
-    animation: none !important;
-    transition: none !important;
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
   }
+}
+:root[data-reduce-motion="true"] * {
+  animation: none !important;
+  transition: none !important;
 }
 
 /* Light mode fallback if you keep the root colors */

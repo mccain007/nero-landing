@@ -1,5 +1,15 @@
 import React, { useState, memo } from "react";
+import Hero from './components/Hero.jsx'
+import HowItWorks from './components/HowItWorks.jsx'
 
+export default function App() {
+  return (
+    <>
+      <Hero />
+      <HowItWorks />
+    </>
+  )
+}
 // ---------------------------------------------
 // Nero — Landing Page (Vite/ESM friendly)
 // - Removes stray starter imports (reactLogo/viteLogo)

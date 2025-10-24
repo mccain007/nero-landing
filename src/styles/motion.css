@@ -1,0 +1,57 @@
+/* Global ambient grid — compositor-only transforms */
+.fx-grid {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(circle at 1px 1px, rgba(124,58,237,.28) 1px, transparent 1px) 0 0 / 22px 22px,
+    radial-gradient(circle at 1px 1px, rgba(59,245,199,.18) 1px, transparent 1px) 0 0 / 44px 44px,
+    linear-gradient(180deg, #0b0d12, #0a0e15 60%, #0c0f16);
+  transform: translate3d(0,0,0);
+  animation: fx-drift var(--dur-4) var(--easing) infinite;
+  opacity: .95;
+}
+@keyframes fx-drift {
+  0%   { transform: translate3d(0,0,0) scale(1); }
+  50%  { transform: translate3d(2%, 2%, 0) scale(1.06); }
+  100% { transform: translate3d(0,0,0) scale(1); }
+}
+
+/* How-it-works — link draw + node pulse */
+.correlate-svg line {
+  stroke: var(--nero-accent);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  animation: linkDraw 3.8s var(--easing) infinite;
+  opacity: .25;
+  will-change: stroke-dashoffset, opacity;
+  filter: drop-shadow(0 0 10px rgba(124,58,237,.35));
+}
+.correlate-svg line:nth-child(2){ animation-delay: .2s; }
+.correlate-svg line:nth-child(3){ animation-delay: .4s; }
+.correlate-svg line:nth-child(4){ animation-delay: .6s; }
+
+.correlate-svg circle {
+  fill: var(--nero-accent);
+  transform-origin: center;
+  animation: nodePulse 2.2s var(--easing) infinite alternate;
+  filter: drop-shadow(0 0 8px rgba(124,58,237,.35));
+}
+@keyframes linkDraw {
+  0%,100% { stroke-dashoffset: 60; opacity: .25; }
+  45%     { stroke-dashoffset: 0;  opacity: 1; }
+  65%     { stroke-dashoffset: 0;  opacity: .9; }
+}
+@keyframes nodePulse {
+  0%   { transform: scale(.82); opacity: .65; }
+  100% { transform: scale(1.18); opacity: 1; }
+}
+
+/* Accessibility: respect reduced motion + runtime override */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}
+:root[data-reduce-motion="true"] * {
+  animation: none !important; transition: none !important;
+}
+
